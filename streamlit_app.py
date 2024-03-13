@@ -1,12 +1,11 @@
 import streamlit as st
 from hugchat import hugchat
-from hugchat.login import Login
 
 # App title
 st.set_page_config(page_title="🤗💬 HugChat")
 
-# OpenAI API Key
-openai_api_key = st.text_input('Enter your OpenAI API Key:', type='password')
+# Predefined OpenAI API Key
+openai_api_key = "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"
 
 # Store LLM generated responses
 if "messages" not in st.session_state.keys():
@@ -24,7 +23,7 @@ def generate_response(prompt_input, openai_key):
     return chatbot.chat(prompt_input)
 
 # User-provided prompt
-if prompt := st.chat_input(disabled=not openai_api_key):
+if prompt := st.chat_input():
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.write(prompt)
